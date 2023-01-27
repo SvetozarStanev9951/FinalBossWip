@@ -1,39 +1,33 @@
-import React from "react";
+import PropTypes from "prop-types";
 
-class Loader extends React.Component {
-  constructor(props) {
-    super(props);
+const useStyles = () => ({
+  container: {
+    position: "absolute",
+    top: 0,
+    width: "100vw",
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.20)",
+  },
+});
 
-    this.state = {
-      bgrColor: "red",
-      color: "white",
-    };
-  }
+function Loader({ isLoading }) {
+  const styles = useStyles();
 
-  handleClick = () => {
-    this.setState({
-      ...this.state,
-      bgrColor: this.state.bgrColor === "red" ? "blue" : "red",
-    });
-  };
-
-  render() {
-    if (this.props.isLoading)
-      return (
-        <>
-          <button onClick={this.handleClick}>Change state</button>
-          <h1
-            style={{
-              backgroundColor: this.state.bgrColor,
-              color: this.state.color,
-            }}
-          >
-            {this.props.children}
-          </h1>
-        </>
-      );
-    else return <></>;
-  }
+  if (isLoading)
+    return (
+      <div style={styles.container}>
+        <h1>Loading...</h1>
+      </div>
+    );
+  else return <></>;
 }
+
+Loader.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+};
 
 export default Loader;
