@@ -1,7 +1,7 @@
 import AppHeading from "./components/AppHeading/AppHeading";
-import Loader from "./components/Loader/Loader";
 
 import "./App.css";
+import Profile from "./components/Profile/Profile";
 
 function App() {
   return (
@@ -9,6 +9,7 @@ function App() {
       <AppHeading textColor="black" bgrColor="wheat">
         My Awesome App
       </AppHeading>
+      <Profile />
     </>
   );
 }
