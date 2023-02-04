@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import AppHeading from "../../components/AppHeading/AppHeading";
 
 const useStyles = () => ({
   container: {
@@ -42,35 +43,40 @@ function SignIn() {
   };
 
   return (
-    <div style={styles.container}>
-      <h1>Sign In</h1>
-      <input
-        type="email"
-        name="email"
-        placeholder="some@email.com"
-        style={styles.input}
-        ref={emailInputRef}
-      />
-      <input
-        type="password"
-        name="password"
-        style={styles.input}
-        placeholder="s0m3Pa55worD"
-        ref={passwordInputRef}
-      />
-      <div style={styles.row}>
+    <>
+      <AppHeading textColor="black" bgrColor="wheat">
+        App
+      </AppHeading>
+      <div style={styles.container}>
+        <h1>Sign In</h1>
         <input
-          type="checkbox"
-          name="rememberMe"
-          style={styles.checkbox}
-          ref={rememberMeInputRef}
+          type="email"
+          name="email"
+          placeholder="some@email.com"
+          style={styles.input}
+          ref={emailInputRef}
         />
-        <span>Remember me?</span>
+        <input
+          type="password"
+          name="password"
+          style={styles.input}
+          placeholder="s0m3Pa55worD"
+          ref={passwordInputRef}
+        />
+        <div style={styles.row}>
+          <input
+            type="checkbox"
+            name="rememberMe"
+            style={styles.checkbox}
+            ref={rememberMeInputRef}
+          />
+          <span>Remember me?</span>
+        </div>
+        <button onClick={handleSignIn} style={styles.input}>
+          Sign in
+        </button>
       </div>
-      <button onClick={handleSignIn} style={styles.input}>
-        Sign in
-      </button>
-    </div>
+    </>
   );
 }
 
