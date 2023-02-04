@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import "./Loader.css";
 
 const useStyles = () => ({
   container: {

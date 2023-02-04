@@ -1,5 +1,4 @@
 import { NavLink, Outlet } from "react-router-dom";
-import PropTypes from "prop-types";
 
 const useStyles = ({ bgrColor, textColor }) => ({
   mainDiv: {
@@ -38,6 +37,9 @@ function AppHeading() {
           </NavLink>
           <NavLink to="/about" style={styles.navLink}>
             About
+          </NavLink>
+          <NavLink to="/profile" style={styles.navLink}>
+            Profile
           </NavLink>
         </div>
       </div>

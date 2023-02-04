@@ -5,6 +5,7 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 
 import AppHeading from "./components/AppHeading/AppHeading";
+import Profile from "./components/Profile/Profile";
 
 import "./App.css";
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "about",
         element: <About />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },
