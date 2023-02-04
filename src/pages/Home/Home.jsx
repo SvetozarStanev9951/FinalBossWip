@@ -1,11 +1,6 @@
-import AppHeading from "../../components/AppHeading/AppHeading";
-
 const Home = () => {
   return (
     <>
-      <AppHeading textColor="black" bgrColor="wheat">
-        App
-      </AppHeading>
       <h1>HOME</h1>
       <p
         style={{

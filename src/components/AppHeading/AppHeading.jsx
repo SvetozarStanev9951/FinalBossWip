@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import PropTypes from "prop-types";
 
 const useStyles = ({ bgrColor, textColor }) => ({
@@ -16,31 +16,34 @@ const useStyles = ({ bgrColor, textColor }) => ({
   navLink: {
     color: textColor,
     fontSize: "40px",
+    margin: "0 20px",
   },
 });
 
-function AppHeading({ bgrColor, textColor, children }) {
+function AppHeading() {
+  const bgrColor = "wheat";
+  const textColor = "black";
+
   const styles = useStyles({ bgrColor, textColor });
 
   return (
-    <div style={styles.mainDiv}>
-      <NavLink to="/" style={{ color: textColor }}>
-        <h1>{children}</h1>
-      </NavLink>
-      <NavLink to="/signIn" style={styles.navLink}>
-        Sign in
-      </NavLink>
-      <NavLink to="/about" style={styles.navLink}>
-        About
-      </NavLink>
-    </div>
+    <>
+      <div style={styles.mainDiv}>
+        <NavLink to="/" style={{ color: textColor }}>
+          <h1>My App</h1>
+        </NavLink>
+        <div>
+          <NavLink to="/signIn" style={styles.navLink}>
+            Sign in
+          </NavLink>
+          <NavLink to="/about" style={styles.navLink}>
+            About
+          </NavLink>
+        </div>
+      </div>
+      <Outlet />
+    </>
   );
 }
-
-AppHeading.propTypes = {
-  bgrColor: PropTypes.string.isRequired,
-  textColor: PropTypes.string.isRequired,
-  children: PropTypes.string.isRequired,
-};
 
 export default AppHeading;

@@ -1,12 +1,6 @@
-// import AppHeading from "../../components/AppHeading/AppHeading";
-import AppHeading from "../../components/AppHeading/AppHeading";
-
 const About = () => {
   return (
     <>
-      <AppHeading textColor="black" bgrColor="wheat">
-        App
-      </AppHeading>
       <h1>ABOUT</h1>
       <p
         style={{

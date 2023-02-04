@@ -1,5 +1,4 @@
 import { useRef } from "react";
-import AppHeading from "../../components/AppHeading/AppHeading";
 
 const useStyles = () => ({
   container: {
@@ -44,9 +43,6 @@ function SignIn() {
 
   return (
     <>
-      <AppHeading textColor="black" bgrColor="wheat">
-        App
-      </AppHeading>
       <div style={styles.container}>
         <h1>Sign In</h1>
         <input
