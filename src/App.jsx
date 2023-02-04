@@ -1,5 +1,5 @@
 import AppHeading from "./components/AppHeading/AppHeading";
-import EventsExercise from "./components/Events/EventsExercise";
+import SignIn from "./pages/SignIn/SignIn";
 
 import "./App.css";
 
@@ -9,7 +9,7 @@ function App() {
       <AppHeading textColor="black" bgrColor="wheat">
         My Awesome App
       </AppHeading>
-      <EventsExercise />
+      <SignIn />
     </>
   );
 }

@@ -1,37 +1,76 @@
-import { useState } from "react";
+import { useRef } from "react";
+
+const useStyles = () => ({
+  container: {
+    width: "60%",
+    maxWidth: "1080px",
+    margin: "auto",
+  },
+  input: {
+    fontSize: "28px",
+    padding: "5px 15px",
+  },
+  row: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    fontSize: "20px",
+    marginBottom: "20px",
+  },
+  checkbox: {
+    width: "50px",
+    margin: 0,
+  },
+});
+
+// @TODO: Add fields validation
 
 function SignIn() {
-  const [userData, setUserData] = useState();
+  const styles = useStyles();
+
+  const emailInputRef = useRef();
+  const passwordInputRef = useRef();
+  const rememberMeInputRef = useRef();
 
   const handleSignIn = () => {
-    console.log(userData);
-  };
-
-  const handleInputChange = ({ target: { value, name, checked, type } }) => {
-    setUserData({
-      ...userData,
-      [name]: type === "checkbox" ? checked : value,
+    console.table({
+      Email: emailInputRef.current.value,
+      Password: passwordInputRef.current.value,
+      "Remember?": rememberMeInputRef.current.checked,
     });
   };
 
   return (
-    <>
+    <div style={styles.container}>
       <h1>Sign In</h1>
       <input
         type="email"
-        onChange={handleInputChange}
         name="email"
-        placeholder="Type in your email"
+        placeholder="some@email.com"
+        style={styles.input}
+        ref={emailInputRef}
       />
-      <input type="password" onChange={handleInputChange} name="password" />
-      <input type="checkbox" onChange={handleInputChange} name="rememberMe" />
       <input
-        type="checkbox"
-        onChange={handleInputChange}
-        name="cookieConsent"
+        type="password"
+        name="password"
+        style={styles.input}
+        placeholder="s0m3Pa55worD"
+        ref={passwordInputRef}
       />
-      <button onClick={handleSignIn}>Sign in </button>
-    </>
+      <div style={styles.row}>
+        <input
+          type="checkbox"
+          name="rememberMe"
+          style={styles.checkbox}
+          ref={rememberMeInputRef}
+        />
+        <span>Remember me?</span>
+      </div>
+      <button onClick={handleSignIn} style={styles.input}>
+        Sign in
+      </button>
+    </div>
   );
 }
 
