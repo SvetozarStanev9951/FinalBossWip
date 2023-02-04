@@ -1,4 +1,5 @@
 import PropTypes from "prop-types";
+import "./Loader.css";
 
 const useStyles = () => ({
   container: {
@@ -19,7 +20,7 @@ function Loader({ isLoading }) {
 
   if (isLoading)
     return (
-      <div style={styles.container}>
+      <div style={styles.container} className="some-class">
         <h1>Loading...</h1>
       </div>
     );
