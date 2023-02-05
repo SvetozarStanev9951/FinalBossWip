@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import SignInButton from "../../components/Styled/SignInButton";
 
 const useStyles = () => ({
   container: {
@@ -23,8 +24,6 @@ const useStyles = () => ({
     margin: 0,
   },
 });
-
-// @TODO: Add fields validation
 
 function SignIn() {
   const styles = useStyles();
@@ -68,9 +67,9 @@ function SignIn() {
           />
           <span>Remember me?</span>
         </div>
-        <button onClick={handleSignIn} style={styles.input}>
+        <SignInButton variant="contained" onClick={handleSignIn}>
           Sign in
-        </button>
+        </SignInButton>
       </div>
     </>
   );

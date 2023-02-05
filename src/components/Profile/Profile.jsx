@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import Loader from "../Loader/Loader";
 import Posts from "../Posts/Posts";
 
 const Profile = () => {
+  const { id } = useParams();
   const [profileData, setProfileData] = useState();
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/users/4")
+    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then((response) => response.json())
       .then((json) => setProfileData(json));
   }, []);
