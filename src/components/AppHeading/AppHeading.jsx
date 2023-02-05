@@ -1,48 +1,42 @@
 import { NavLink, Outlet } from "react-router-dom";
+import { Box, styled, Typography } from "@mui/material";
 
-const useStyles = ({ bgrColor, textColor }) => ({
-  mainDiv: {
-    backgroundColor: bgrColor,
-    color: textColor,
-    textAlign: "left",
-    height: "fit-content",
-    padding: "20px",
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  navLink: {
-    color: textColor,
-    fontSize: "40px",
-    margin: "0 20px",
-  },
-});
+const Container = styled(Box)(() => ({
+  backgroundColor: "wheat",
+  color: "black",
+  textAlign: "left",
+  height: "fit-content",
+  padding: "20px",
+  display: "flex",
+  flexDirection: "row",
+  justifyContent: "space-between",
+  alignItems: "center",
+}));
+
+const LinkText = styled(Typography)(() => ({
+  color: "black",
+  margin: "0 20px",
+}));
 
 function AppHeading() {
-  const bgrColor = "wheat";
-  const textColor = "black";
-
-  const styles = useStyles({ bgrColor, textColor });
-
   return (
     <>
-      <div style={styles.mainDiv}>
-        <NavLink to="/" style={{ color: textColor }}>
-          <h1>My App</h1>
+      <Container>
+        <NavLink to="/">
+          <LinkText variant="h3">My App</LinkText>
         </NavLink>
-        <div>
-          <NavLink to="/signIn" style={styles.navLink}>
-            Sign in
+        <Container>
+          <NavLink to="/signIn">
+            <LinkText variant="h4">Sign in</LinkText>
           </NavLink>
-          <NavLink to="/about" style={styles.navLink}>
-            About
+          <NavLink to="/about">
+            <LinkText variant="h4">About</LinkText>
           </NavLink>
-          <NavLink to="/profile" style={styles.navLink}>
-            Profile
+          <NavLink to="/profile">
+            <LinkText variant="h4">Profile</LinkText>
           </NavLink>
-        </div>
-      </div>
+        </Container>
+      </Container>
       <Outlet />
     </>
   );
