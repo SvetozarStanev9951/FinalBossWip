@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { Typography, Box, styled } from "@mui/material";
 import SignInButton from "../../components/Styled/SignInButton";
 
 const useStyles = () => ({
@@ -25,6 +26,12 @@ const useStyles = () => ({
   },
 });
 
+const Container = styled(Box)(() => ({
+  width: "60%",
+  maxWidth: "1080px",
+  margin: "auto",
+}));
+
 function SignIn() {
   const styles = useStyles();
 
@@ -41,37 +48,35 @@ function SignIn() {
   };
 
   return (
-    <>
-      <div style={styles.container}>
-        <h1>Sign In</h1>
+    <Container>
+      <Typography variant="h2">Sign In</Typography>
+      <input
+        type="email"
+        name="email"
+        placeholder="some@email.com"
+        style={styles.input}
+        ref={emailInputRef}
+      />
+      <input
+        type="password"
+        name="password"
+        style={styles.input}
+        placeholder="s0m3Pa55worD"
+        ref={passwordInputRef}
+      />
+      <div style={styles.row}>
         <input
-          type="email"
-          name="email"
-          placeholder="some@email.com"
-          style={styles.input}
-          ref={emailInputRef}
+          type="checkbox"
+          name="rememberMe"
+          style={styles.checkbox}
+          ref={rememberMeInputRef}
         />
-        <input
-          type="password"
-          name="password"
-          style={styles.input}
-          placeholder="s0m3Pa55worD"
-          ref={passwordInputRef}
-        />
-        <div style={styles.row}>
-          <input
-            type="checkbox"
-            name="rememberMe"
-            style={styles.checkbox}
-            ref={rememberMeInputRef}
-          />
-          <span>Remember me?</span>
-        </div>
-        <SignInButton variant="contained" onClick={handleSignIn}>
-          Sign in
-        </SignInButton>
+        <span>Remember me?</span>
       </div>
-    </>
+      <SignInButton variant="outlined" onClick={handleSignIn}>
+        Sign in
+      </SignInButton>
+    </Container>
   );
 }
 

@@ -1,8 +1,8 @@
 import { Button, styled } from "@mui/material";
 
 const SignInButton = styled(Button)(() => ({
-  width: "200px",
-  height: "100px",
+  width: "100%",
+  fontSize: "20px",
 }));
 
 export default SignInButton;
