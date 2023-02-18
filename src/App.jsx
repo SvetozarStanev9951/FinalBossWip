@@ -8,6 +8,7 @@ import AppHeading from "./components/AppHeading/AppHeading";
 import Profile from "./components/Profile/Profile";
 
 import "./App.css";
+import Playground from "./pages/Playground/Playground";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "profile/:id",
         element: <Profile />,
+      },
+      {
+        path: "playground",
+        element: <Playground />,
       },
     ],
   },
