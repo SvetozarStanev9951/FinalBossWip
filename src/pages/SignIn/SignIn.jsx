@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import SignInButton from "../../components/Styled/SignInButton";
 import { AppContext } from "../../components/AppContext/AppContext";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled(Box)(() => ({
   width: "60%",
@@ -17,18 +18,13 @@ const Container = styled(Box)(() => ({
 }));
 
 function SignIn() {
-  const { hello } = useContext(AppContext);
+  const { setUser } = useContext(AppContext);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const rememberMeInputRef = useRef();
+  const navigate = useNavigate();
 
-  console.log(hello);
   const handleSignIn = async () => {
-    console.table({
-      Email: emailInputRef.current?.value ?? "",
-      Password: passwordInputRef.current?.value ?? "",
-      "Remember?": rememberMeInputRef.current?.checked ?? false,
-    });
     const email = emailInputRef.current?.value?.trim();
     const password = passwordInputRef.current?.value?.trim();
 
@@ -54,7 +50,9 @@ function SignIn() {
     const [user] = allUsers.filter(
       (el) => el.email.toLowerCase() === email.toLowerCase()
     );
-    console.log(user);
+
+    setUser(user);
+    navigate("/profile");
   };
 
   return (

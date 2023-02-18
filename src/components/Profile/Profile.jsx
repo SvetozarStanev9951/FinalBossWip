@@ -1,18 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
+import { AppContext } from "../AppContext/AppContext";
 
 import Loader from "../Loader/Loader";
 import Posts from "../Posts/Posts";
 
 const Profile = () => {
-  const { id } = useParams();
-  const [profileData, setProfileData] = useState();
-
-  useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
-      .then((response) => response.json())
-      .then((json) => setProfileData(json));
-  }, []);
+  const { user: profileData } = useContext(AppContext);
 
   if (!profileData) return <Loader isLoading={true} />;
 
