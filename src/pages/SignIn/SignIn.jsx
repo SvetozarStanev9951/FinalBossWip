@@ -1,4 +1,4 @@
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import {
   Typography,
   Box,
@@ -24,23 +24,29 @@ function SignIn() {
   const rememberMeInputRef = useRef();
   const navigate = useNavigate();
 
+  const [errors, setErrors] = useState({
+    email: "",
+    password: "",
+  });
+
   const handleSignIn = async () => {
+    setErrors({});
+
     const email = emailInputRef.current?.value?.trim();
     const password = passwordInputRef.current?.value?.trim();
 
     if (!email) {
-      alert("Wrong email");
-      return;
+      setErrors((errors) => ({ ...errors, email: "Email is required" }));
     }
 
     if (!password) {
-      alert("Wrong password");
+      setErrors((errors) => ({ ...errors, password: "Password is required" }));
       return;
-    }
-
-    if (password !== "test1234") {
-      alert("Wrong password");
-      return;
+    } else {
+      if (password !== "test1234") {
+        setErrors((errors) => ({ ...errors, password: "Wrong password" }));
+        return;
+      }
     }
 
     const allUsers = await fetch("https://jsonplaceholder.typicode.com/users")
@@ -51,6 +57,11 @@ function SignIn() {
       (el) => el.email.toLowerCase() === email.toLowerCase()
     );
 
+    if (!user) {
+      setErrors((errors) => ({ ...errors, email: "User does not exist" }));
+      return;
+    }
+
     setUser(user);
     navigate("/profile");
   };
@@ -59,8 +70,9 @@ function SignIn() {
     <Container>
       <Typography variant="h2">Sign In</Typography>
       <TextField
+        error={errors.email}
         fullWidth
-        helperText="Type in your email"
+        helperText={errors.email || "Type in your email"}
         placeholder="some@email.com"
         inputRef={emailInputRef}
         type="email"
@@ -72,7 +84,8 @@ function SignIn() {
       />
       <TextField
         fullWidth
-        helperText="Type in your password"
+        error={errors.password}
+        helperText={errors.password || "Type in your password"}
         placeholder="s0m3pa55word"
         inputRef={passwordInputRef}
         type="password"
