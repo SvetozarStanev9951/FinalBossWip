@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useContext, useRef } from "react";
 import {
   Typography,
   Box,
@@ -8,6 +8,7 @@ import {
   FormControlLabel,
 } from "@mui/material";
 import SignInButton from "../../components/Styled/SignInButton";
+import { AppContext } from "../../components/AppContext/AppContext";
 
 const Container = styled(Box)(() => ({
   width: "60%",
@@ -16,16 +17,44 @@ const Container = styled(Box)(() => ({
 }));
 
 function SignIn() {
+  const { hello } = useContext(AppContext);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const rememberMeInputRef = useRef();
 
-  const handleSignIn = () => {
+  console.log(hello);
+  const handleSignIn = async () => {
     console.table({
       Email: emailInputRef.current?.value ?? "",
       Password: passwordInputRef.current?.value ?? "",
       "Remember?": rememberMeInputRef.current?.checked ?? false,
     });
+    const email = emailInputRef.current?.value?.trim();
+    const password = passwordInputRef.current?.value?.trim();
+
+    if (!email) {
+      alert("Wrong email");
+      return;
+    }
+
+    if (!password) {
+      alert("Wrong password");
+      return;
+    }
+
+    if (password !== "test1234") {
+      alert("Wrong password");
+      return;
+    }
+
+    const allUsers = await fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((json) => json);
+
+    const [user] = allUsers.filter(
+      (el) => el.email.toLowerCase() === email.toLowerCase()
+    );
+    console.log(user);
   };
 
   return (
