@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { Box, styled, Typography } from "@mui/material";
+import { AppContext } from "../AppContext/AppContext";
 
 const Container = styled(Box)(() => ({
   backgroundColor: "wheat",
@@ -19,6 +21,7 @@ const LinkText = styled(Typography)(() => ({
 }));
 
 function AppHeading() {
+  const { user } = useContext(AppContext);
   return (
     <>
       <Container>
@@ -26,20 +29,35 @@ function AppHeading() {
           <LinkText variant="h3">My App</LinkText>
         </NavLink>
         <Container>
-          <NavLink to="/signIn">
-            <LinkText variant="h4">Sign in</LinkText>
-          </NavLink>
           <NavLink to="/about">
             <LinkText variant="h4">About</LinkText>
           </NavLink>
-          <NavLink to="/profile">
-            <LinkText variant="h4">Profile</LinkText>
-          </NavLink>
+          {user?.id ? <UserHeading /> : <PublicHeading />}
         </Container>
       </Container>
       <Outlet />
     </>
   );
 }
+
+const UserHeading = () => {
+  return (
+    <>
+      <NavLink to="/profile">
+        <LinkText variant="h4">Profile</LinkText>
+      </NavLink>
+    </>
+  );
+};
+
+const PublicHeading = () => {
+  return (
+    <>
+      <NavLink to="/signIn">
+        <LinkText variant="h4">Sign in</LinkText>
+      </NavLink>
+    </>
+  );
+};
 
 export default AppHeading;

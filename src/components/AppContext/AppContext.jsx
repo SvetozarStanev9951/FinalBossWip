@@ -7,7 +7,9 @@ const AppContextProvider = ({ children }) => {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    const savedUserValue = window.localStorage.getItem(STORAGE_KEYS.USER);
+    const savedUserValue =
+      window.localStorage.getItem(STORAGE_KEYS.USER) ||
+      window.sessionStorage.getItem(STORAGE_KEYS.USER);
 
     if (savedUserValue) {
       setUser(JSON.parse(savedUserValue));

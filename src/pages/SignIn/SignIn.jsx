@@ -78,6 +78,8 @@ function SignIn() {
 
     if (rememberMeInputRef.current.checked) {
       window.localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
+    } else {
+      window.sessionStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
     }
 
     setUser(user);
