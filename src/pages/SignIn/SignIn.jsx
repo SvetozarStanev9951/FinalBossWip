@@ -20,9 +20,8 @@ const Container = styled(Box)(() => ({
   margin: "auto",
 }));
 
-// 3. App Heading -> Display user data, display sign out btn
 // 4. Sign out page
-// 5. On sign out confirm, remove all user data
+// 5. On sign out confirm, remove all user data (Sign Out function)
 // 6. Custom auth hook
 
 function SignIn() {

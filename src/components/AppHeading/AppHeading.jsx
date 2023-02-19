@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { Box, styled, Typography } from "@mui/material";
 import { AppContext } from "../AppContext/AppContext";
+import { STORAGE_KEYS } from "../../utils/constants";
 
 const Container = styled(Box)(() => ({
   backgroundColor: "wheat",
@@ -29,10 +30,22 @@ function AppHeading() {
           <LinkText variant="h3">My App</LinkText>
         </NavLink>
         <Container>
+          {user?.id && (
+            <Typography
+              variant="h4"
+              sx={{
+                color: "lightyellow",
+                marginRight: "50px",
+                fontStyle: "italic",
+              }}
+            >
+              Hello, {user.name}
+            </Typography>
+          )}
           <NavLink to="/about">
             <LinkText variant="h4">About</LinkText>
           </NavLink>
-          {user?.id ? <UserHeading /> : <PublicHeading />}
+          {user?.id ? <UserHeading name={user.name} /> : <PublicHeading />}
         </Container>
       </Container>
       <Outlet />
@@ -41,10 +54,27 @@ function AppHeading() {
 }
 
 const UserHeading = () => {
+  const { setUser } = useContext(AppContext);
+  const navigate = useNavigate();
+
+  const handleSignOut = (e) => {
+    e.preventDefault();
+
+    window.localStorage.removeItem(STORAGE_KEYS.USER);
+    window.sessionStorage.removeItem(STORAGE_KEYS.USER);
+
+    setUser(null);
+
+    navigate("/signIn");
+  };
+
   return (
     <>
       <NavLink to="/profile">
         <LinkText variant="h4">Profile</LinkText>
+      </NavLink>
+      <NavLink to="/signOut" onClick={handleSignOut}>
+        <LinkText variant="h4">Sign out</LinkText>
       </NavLink>
     </>
   );
