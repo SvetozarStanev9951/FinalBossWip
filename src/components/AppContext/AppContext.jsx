@@ -1,9 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { STORAGE_KEYS } from "../../utils/constants";
 
 export const AppContext = createContext({});
 
 const AppContextProvider = ({ children }) => {
   const [user, setUser] = useState();
+
+  useEffect(() => {
+    const savedUserValue = window.localStorage.getItem(STORAGE_KEYS.USER);
+
+    if (savedUserValue) {
+      setUser(JSON.parse(savedUserValue));
+    }
+  }, []);
 
   return (
     <AppContext.Provider

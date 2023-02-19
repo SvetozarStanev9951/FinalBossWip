@@ -1,4 +1,5 @@
 import { useContext, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Typography,
   Box,
@@ -7,15 +8,25 @@ import {
   Checkbox,
   FormControlLabel,
 } from "@mui/material";
+
 import SignInButton from "../../components/Styled/SignInButton";
 import { AppContext } from "../../components/AppContext/AppContext";
-import { useNavigate } from "react-router-dom";
+
+import { STORAGE_KEYS } from "../../utils/constants";
 
 const Container = styled(Box)(() => ({
   width: "60%",
   maxWidth: "1080px",
   margin: "auto",
 }));
+
+// 1. Remember me
+// 1.1. Save user in
+// 1.2. On mount check for saved user in the storage
+// 2. Redirect signed users to home page
+// 3. App Heading -> Display user data, display sign out btn
+// 4. Sign out page
+// 5. On sign out confirm, remove all user data
 
 function SignIn() {
   const { setUser } = useContext(AppContext);
@@ -60,6 +71,10 @@ function SignIn() {
     if (!user) {
       setErrors((errors) => ({ ...errors, email: "User does not exist" }));
       return;
+    }
+
+    if (rememberMeInputRef.current.checked) {
+      window.localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
     }
 
     setUser(user);

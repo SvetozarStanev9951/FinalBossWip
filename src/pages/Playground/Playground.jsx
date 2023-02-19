@@ -26,6 +26,7 @@ const Playground = () => {
             <UserPage />
           </Row>
         </UserContextProvider>
+
         <ToDosContextProvider>
           <h3>ToDos Context</h3>
           <ToDosInput />
