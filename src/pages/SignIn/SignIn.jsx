@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -20,16 +20,13 @@ const Container = styled(Box)(() => ({
   margin: "auto",
 }));
 
-// 1. Remember me
-// 1.1. Save user in
-// 1.2. On mount check for saved user in the storage
-// 2. Redirect signed users to home page
 // 3. App Heading -> Display user data, display sign out btn
 // 4. Sign out page
 // 5. On sign out confirm, remove all user data
+// 6. Custom auth hook
 
 function SignIn() {
-  const { setUser } = useContext(AppContext);
+  const { user, setUser } = useContext(AppContext);
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const rememberMeInputRef = useRef();
@@ -39,6 +36,12 @@ function SignIn() {
     email: "",
     password: "",
   });
+
+  useEffect(() => {
+    if (user?.id) {
+      navigate("/profile");
+    }
+  }, [user]);
 
   const handleSignIn = async () => {
     setErrors({});
