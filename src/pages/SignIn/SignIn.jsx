@@ -89,7 +89,7 @@ function SignIn() {
     <Container>
       <Typography variant="h2">Sign In</Typography>
       <TextField
-        error={errors.email}
+        error={!!errors.email}
         fullWidth
         helperText={errors.email || "Type in your email"}
         placeholder="some@email.com"
@@ -103,7 +103,7 @@ function SignIn() {
       />
       <TextField
         fullWidth
-        error={errors.password}
+        error={!!errors.password}
         helperText={errors.password || "Type in your password"}
         placeholder="s0m3pa55word"
         inputRef={passwordInputRef}
