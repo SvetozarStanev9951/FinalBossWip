@@ -1,0 +1,16 @@
+{
+  "verbose": true,
+  "testMatch": ["**/*.test.js?(x)", "**/*.unitTest.js?(x)"],
+  "testEnvironment": "jsdom",
+  "collectCoverage": true,
+  "collectCoverageFrom": ["src/**/*.{js,jsx}"],
+  "coverageDirectory": "coverage",
+  "coverageThreshold": {
+    "global": {
+      "branches": 60,
+      "functions": 60,
+      "lines": 60,
+      "statements": 60
+    }
+  }
+}
