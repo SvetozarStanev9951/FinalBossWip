@@ -7,4 +7,10 @@ describe("<Loader/>", () => {
     const loadingText = screen.getByText("Loading...");
     expect(loadingText).toBeInTheDocument;
   });
+
+  it("Should work properly when isLoading = false", () => {
+    const { container } = render(<Loader isLoading={false} />);
+
+    expect(container.innerHTML).toHaveLength(0);
+  });
 });

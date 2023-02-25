@@ -1,6 +1,5 @@
 {
   "verbose": true,
-  "testMatch": ["**/*.test.js?(x)", "**/*.unitTest.js?(x)"],
   "testEnvironment": "jsdom",
   "collectCoverage": true,
   "collectCoverageFrom": ["src/**/*.{js,jsx}"],
