@@ -35,6 +35,7 @@ function SignIn() {
     email: "",
     password: "",
   });
+  const [email, setEmail] = useState("");
 
   useEffect(() => {
     if (user?.id) {
@@ -85,6 +86,10 @@ function SignIn() {
     navigate("/profile");
   };
 
+  const handleInputChange = (e) => {
+    setEmail(e.target.value);
+  };
+
   return (
     <Container>
       <Typography variant="h2">Sign In</Typography>
@@ -100,6 +105,8 @@ function SignIn() {
             fontSize: "28px",
           },
         }}
+        value={email}
+        onChange={handleInputChange}
       />
       <TextField
         fullWidth
@@ -118,7 +125,11 @@ function SignIn() {
         control={<Checkbox inputRef={rememberMeInputRef} />}
         label="Remember me"
       />
-      <SignInButton variant="outlined" onClick={handleSignIn}>
+      <SignInButton
+        variant="outlined"
+        onClick={handleSignIn}
+        data-testid="sign-in-button"
+      >
         Sign in
       </SignInButton>
     </Container>
