@@ -26,9 +26,7 @@ const Container = styled(Box)(() => ({
 
 function SignIn() {
   const { user, setUser } = useContext(AppContext);
-  const emailInputRef = useRef();
   const passwordInputRef = useRef();
-  const rememberMeInputRef = useRef();
   const navigate = useNavigate();
 
   const [errors, setErrors] = useState({
@@ -36,6 +34,7 @@ function SignIn() {
     password: "",
   });
   const [email, setEmail] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   useEffect(() => {
     if (user?.id) {
@@ -46,7 +45,6 @@ function SignIn() {
   const handleSignIn = async () => {
     setErrors({});
 
-    const email = emailInputRef.current?.value?.trim();
     const password = passwordInputRef.current?.value?.trim();
 
     if (!email) {
@@ -76,7 +74,7 @@ function SignIn() {
       return;
     }
 
-    if (rememberMeInputRef.current.checked) {
+    if (rememberMe) {
       window.localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
     } else {
       window.sessionStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(user));
@@ -87,7 +85,9 @@ function SignIn() {
   };
 
   const handleInputChange = (e) => {
-    setEmail(e.target.value);
+    const { value, checked, type } = e.target;
+    if (type === "email") setEmail(value);
+    if (type === "checkbox") setRememberMe(checked);
   };
 
   return (
@@ -98,7 +98,6 @@ function SignIn() {
         fullWidth
         helperText={errors.email || "Type in your email"}
         placeholder="some@email.com"
-        inputRef={emailInputRef}
         type="email"
         inputProps={{
           style: {
@@ -122,7 +121,7 @@ function SignIn() {
         }}
       />
       <FormControlLabel
-        control={<Checkbox inputRef={rememberMeInputRef} />}
+        control={<Checkbox checked={rememberMe} onChange={handleInputChange} />}
         label="Remember me"
       />
       <SignInButton

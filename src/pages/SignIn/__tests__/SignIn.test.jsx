@@ -28,9 +28,17 @@ describe("<SignIn/>", () => {
   it("Handles user inputs", () => {
     const { container } = render(<SignInWithRouter />);
     const emailInput = container.querySelector("input[type='email']");
+    const passwordInput = container.querySelector("input[type='password']");
+    const rememberMeCheckbox = container.querySelector(
+      "input[type='checkbox']"
+    );
 
     fireEvent.change(emailInput, { target: { value: "test@email.com" } });
+    fireEvent.change(rememberMeCheckbox, { target: { checked: true } });
+    fireEvent.change(passwordInput, { target: { value: "testPassword" } });
 
     expect(emailInput.value).toBe("test@email.com");
+    expect(rememberMeCheckbox.checked).toBe(true);
+    expect(screen.getByDisplayValue("testPassword")).toBeInTheDocument();
   });
 });
