@@ -1,12 +1,29 @@
 import { MemoryRouter } from "react-router-dom";
-import { render, screen, fireEvent } from "@testing-library/react";
+import {
+  render,
+  screen,
+  fireEvent,
+  act,
+  waitFor,
+} from "@testing-library/react";
 import SignIn from "../SignIn";
+import { TEST_IDS, TEXTS, validPassword } from "../../../utils/constants";
 
 const SignInWithRouter = () => (
   <MemoryRouter>
     <SignIn />
   </MemoryRouter>
 );
+
+global.fetch = jest.fn(() =>
+  Promise.resolve({
+    json: () => Promise.resolve([{ email: "email@test.com" }]),
+  })
+);
+
+beforeEach(() => {
+  fetch.mockClear();
+});
 
 describe("<SignIn/>", () => {
   it("Renders all input fields", () => {
@@ -42,21 +59,36 @@ describe("<SignIn/>", () => {
     expect(screen.getByDisplayValue("testPassword")).toBeInTheDocument();
   });
 
-  it("Handles sign in flow", () => {
+  it("Handles sign in flow", async () => {
     const { container } = render(<SignInWithRouter />);
     const emailInput = container.querySelector("input[type='email']");
     const passwordInput = container.querySelector("input[type='password']");
     const rememberMeCheckbox = container.querySelector(
       "input[type='checkbox']"
     );
-    const signInButton = screen.getByTestId("sign-in-button");
-    const emailHelperText = screen.getByText("Type in your email");
+    const signInButton = screen.getByTestId(TEST_IDS.signInBtn);
+    const emailHelperText = screen.getByText(TEXTS.emailHelper);
+    const passwordHelperText = screen.getByText(TEXTS.passwordHelper);
 
     fireEvent.click(signInButton);
-    expect(emailHelperText.textContent).toBe("Email is required");
+    expect(emailHelperText.textContent).toBe(TEXTS.emailError);
+    expect(passwordHelperText.textContent).toBe(TEXTS.missingPasswordError);
 
     fireEvent.change(emailInput, { target: { value: "test@email.com" } });
     fireEvent.click(signInButton);
-    expect(emailHelperText.textContent).toBe("Type in your email");
+    expect(emailHelperText.textContent).toBe(TEXTS.emailHelper);
+
+    fireEvent.change(passwordInput, { target: { value: "testPassword" } });
+    fireEvent.click(signInButton);
+    expect(passwordHelperText.textContent).toBe(TEXTS.wrongPasswordError);
+
+    fireEvent.change(passwordInput, { target: { value: validPassword } });
+    act(() => {
+      fireEvent.click(signInButton);
+    });
+
+    await waitFor(() => {
+      expect(emailHelperText.textContent).toBe(TEXTS.userDoesNotExistError);
+    });
   });
 });

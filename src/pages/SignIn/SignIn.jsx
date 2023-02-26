@@ -12,7 +12,12 @@ import {
 import SignInButton from "../../components/Styled/SignInButton";
 import { AppContext } from "../../components/AppContext/AppContext";
 
-import { STORAGE_KEYS } from "../../utils/constants";
+import {
+  STORAGE_KEYS,
+  TEST_IDS,
+  TEXTS,
+  validPassword,
+} from "../../utils/constants";
 
 const Container = styled(Box)(() => ({
   width: "60%",
@@ -48,15 +53,21 @@ function SignIn() {
     const password = passwordInputRef.current?.value?.trim();
 
     if (!email) {
-      setErrors((errors) => ({ ...errors, email: "Email is required" }));
+      setErrors((errors) => ({ ...errors, email: TEXTS.emailError }));
     }
 
     if (!password) {
-      setErrors((errors) => ({ ...errors, password: "Password is required" }));
+      setErrors((errors) => ({
+        ...errors,
+        password: TEXTS.missingPasswordError,
+      }));
       return;
     } else {
-      if (password !== "test1234") {
-        setErrors((errors) => ({ ...errors, password: "Wrong password" }));
+      if (password !== validPassword) {
+        setErrors((errors) => ({
+          ...errors,
+          password: TEXTS.wrongPasswordError,
+        }));
         return;
       }
     }
@@ -70,7 +81,10 @@ function SignIn() {
     );
 
     if (!user) {
-      setErrors((errors) => ({ ...errors, email: "User does not exist" }));
+      setErrors((errors) => ({
+        ...errors,
+        email: TEXTS.userDoesNotExistError,
+      }));
       return;
     }
 
@@ -96,7 +110,7 @@ function SignIn() {
       <TextField
         error={!!errors.email}
         fullWidth
-        helperText={errors.email || "Type in your email"}
+        helperText={errors.email || TEXTS.emailHelper}
         placeholder="some@email.com"
         type="email"
         inputProps={{
@@ -110,7 +124,7 @@ function SignIn() {
       <TextField
         fullWidth
         error={!!errors.password}
-        helperText={errors.password || "Type in your password"}
+        helperText={errors.password || TEXTS.passwordHelper}
         placeholder="s0m3pa55word"
         inputRef={passwordInputRef}
         type="password"
@@ -127,7 +141,7 @@ function SignIn() {
       <SignInButton
         variant="outlined"
         onClick={handleSignIn}
-        data-testid="sign-in-button"
+        data-testid={TEST_IDS.signInBtn}
       >
         Sign in
       </SignInButton>
