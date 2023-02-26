@@ -38,7 +38,25 @@ describe("<SignIn/>", () => {
     fireEvent.change(passwordInput, { target: { value: "testPassword" } });
 
     expect(emailInput.value).toBe("test@email.com");
-    expect(rememberMeCheckbox.checked).toBe(true);
+    expect(rememberMeCheckbox).toBeChecked();
     expect(screen.getByDisplayValue("testPassword")).toBeInTheDocument();
+  });
+
+  it("Handles sign in flow", () => {
+    const { container } = render(<SignInWithRouter />);
+    const emailInput = container.querySelector("input[type='email']");
+    const passwordInput = container.querySelector("input[type='password']");
+    const rememberMeCheckbox = container.querySelector(
+      "input[type='checkbox']"
+    );
+    const signInButton = screen.getByTestId("sign-in-button");
+    const emailHelperText = screen.getByText("Type in your email");
+
+    fireEvent.click(signInButton);
+    expect(emailHelperText.textContent).toBe("Email is required");
+
+    fireEvent.change(emailInput, { target: { value: "test@email.com" } });
+    fireEvent.click(signInButton);
+    expect(emailHelperText.textContent).toBe("Type in your email");
   });
 });
