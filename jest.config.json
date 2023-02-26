@@ -1,6 +1,7 @@
 {
   "verbose": true,
   "testEnvironment": "jsdom",
+  "setupFilesAfterEnv": ["<rootDir>/src/setupTests.js"],
   "collectCoverage": true,
   "collectCoverageFrom": ["src/**/*.{js,jsx}"],
   "coverageDirectory": "coverage",

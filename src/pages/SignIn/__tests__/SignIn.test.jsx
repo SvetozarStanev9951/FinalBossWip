@@ -1,5 +1,5 @@
 import { MemoryRouter } from "react-router-dom";
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import SignIn from "../SignIn";
 
 describe("<SignIn/>", () => {
@@ -17,7 +17,7 @@ describe("<SignIn/>", () => {
     // ----------
 
     // Assert
-    expect(emailInput).toBeInTheDocument;
-    expect(passwordInput).toBeInTheDocument;
+    expect(emailInput).toBeInTheDocument();
+    expect(passwordInput).toBeInTheDocument();
   });
 });
