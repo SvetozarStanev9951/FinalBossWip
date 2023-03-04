@@ -2,12 +2,6 @@ import { screen, render } from "@testing-library/react";
 import Profile from "../Profile";
 import { AppContext } from "../../AppContext/AppContext";
 
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve([]),
-  })
-);
-
 describe("<Profile />", () => {
   it("Shows the right data", () => {
     render(
@@ -18,7 +12,6 @@ describe("<Profile />", () => {
             email: "test@email.com",
             username: "Test Username",
             phone: "123456789",
-            userId: "3",
           },
         }}
       >

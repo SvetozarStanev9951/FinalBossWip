@@ -12,12 +12,13 @@ const Posts = ({ userId }) => {
 
   return (
     <div className="posts-container">
-      {posts.map(({ title, body }) => (
-        <div className="single-post" key={title}>
-          <h3>{title}</h3>
-          <p>{body}</p>
-        </div>
-      ))}
+      {posts.length > 0 &&
+        posts.map(({ title, body }) => (
+          <div className="single-post" key={title}>
+            <h3>{title}</h3>
+            <p>{body}</p>
+          </div>
+        ))}
     </div>
   );
 };

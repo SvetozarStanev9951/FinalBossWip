@@ -15,16 +15,6 @@ const SignInWithRouter = () => (
   </MemoryRouter>
 );
 
-// global.fetch = jest.fn(() =>
-//   Promise.resolve({
-//     json: () => Promise.resolve([{ email: "email@test.com" }]),
-//   })
-// );
-
-// beforeEach(() => {
-//   fetch.mockClear();
-// });
-
 describe("<SignIn/>", () => {
   it("Renders all input fields", () => {
     const { container } = render(<SignInWithRouter />);
