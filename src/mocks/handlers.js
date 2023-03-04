@@ -14,7 +14,7 @@ const allUsers = [
 ];
 
 export const handlers = [
-  rest.get(`${baseUrl}/users`, (req, res) => {
+  rest.get(`${baseUrl}/users`, (req, res, ctx) => {
     return res(ctx.status(200), ctx.json(allUsers));
   }),
 ];

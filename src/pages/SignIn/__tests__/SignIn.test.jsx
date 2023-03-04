@@ -92,3 +92,5 @@ describe("<SignIn/>", () => {
     });
   });
 });
+
+// FETCH ERROR FIXED BY INSTALLING whatwg-fetch
