@@ -1,5 +1,4 @@
-import { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useContext } from "react";
 import { AppContext } from "../AppContext/AppContext";
 
 import Loader from "../Loader/Loader";
@@ -17,7 +16,7 @@ const Profile = () => {
       <p>Username: {profileData.username}</p>
       <p>Email: {profileData.email}</p>
       <p>Phone: {profileData.phone}</p>
-      <Posts userId={profileData.id} />
+      {profileData.id && <Posts userId={profileData.id} />}
     </>
   );
 };

@@ -12,5 +12,6 @@
       "lines": 60,
       "statements": 60
     }
-  }
+  },
+  "moduleNameMapper": { "\\.css$": "<rootDir>/src/utils/styleMock.js" }
 }
