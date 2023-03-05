@@ -30,6 +30,9 @@ function AppHeading() {
         <NavLink to="/">
           <LinkText variant="h3">My App</LinkText>
         </NavLink>
+        <NavLink to="/shop">
+          <LinkText variant="h5">Shop</LinkText>
+        </NavLink>
         <Container>
           {user?.id && (
             <Typography

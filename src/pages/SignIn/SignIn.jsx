@@ -25,9 +25,6 @@ const Container = styled(Box)(() => ({
   margin: "auto",
 }));
 
-// 4. Sign out page
-// 5. On sign out confirm, remove all user data (Sign Out function)
-
 function SignIn() {
   const { user, setUser } = useContext(AppContext);
   const passwordInputRef = useRef();
