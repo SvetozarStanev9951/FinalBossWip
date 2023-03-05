@@ -40,10 +40,10 @@ describe("<AppHeading />", () => {
     ]);
     render(<RouterProvider router={router} />);
 
-    const aboutLink = screen.getByRole("link", { name: /sign in/i });
+    const signInLink = screen.getByRole("link", { name: /sign in/i });
 
     act(() => {
-      fireEvent.click(aboutLink);
+      fireEvent.click(signInLink);
     });
 
     const signInButton = screen.getByRole("button", { name: /sign in/i });
