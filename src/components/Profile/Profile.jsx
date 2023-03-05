@@ -1,13 +1,12 @@
-import { useContext } from "react";
-import { AppContext } from "../AppContext/AppContext";
-
+import useAuth from "../../hooks/useAuth";
 import Loader from "../Loader/Loader";
+
 import Posts from "../Posts/Posts";
 
 const Profile = () => {
-  const { user: profileData } = useContext(AppContext);
+  const profileData = useAuth();
 
-  if (!profileData) return <Loader isLoading={true} />;
+  if (!profileData) return <Loader isLoading />;
 
   return (
     <>
