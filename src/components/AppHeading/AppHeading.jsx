@@ -1,8 +1,9 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { Box, styled, Typography } from "@mui/material";
 import { AppContext } from "../AppContext/AppContext";
 import { STORAGE_KEYS } from "../../utils/constants";
+import SignOutDialog from "../SignOutDialog/SignOutDialog";
 
 const Container = styled(Box)(() => ({
   backgroundColor: "wheat",
@@ -57,14 +58,18 @@ const UserHeading = () => {
   const { setUser } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const handleSignOut = (e) => {
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const openSignOutDialog = (e) => {
     e.preventDefault();
+    setOpenDialog(true);
+  };
 
-    window.localStorage.removeItem(STORAGE_KEYS.USER);
-    window.sessionStorage.removeItem(STORAGE_KEYS.USER);
-
+  const handleConfirmSignOut = () => {
+    ["sessionStorage", "localStorage"].forEach((storage) => {
+      window[storage].removeItem(STORAGE_KEYS.USER);
+    });
     setUser(null);
-
     navigate("/signIn");
   };
 
@@ -73,9 +78,14 @@ const UserHeading = () => {
       <NavLink to="/profile">
         <LinkText variant="h4">Profile</LinkText>
       </NavLink>
-      <NavLink to="/signOut" onClick={handleSignOut}>
+      <NavLink to="/signOut" onClick={openSignOutDialog}>
         <LinkText variant="h4">Sign out</LinkText>
       </NavLink>
+      <SignOutDialog
+        open={openDialog}
+        handleConfirm={handleConfirmSignOut}
+        handleClose={() => setOpenDialog(false)}
+      />
     </>
   );
 };

@@ -27,7 +27,6 @@ const Container = styled(Box)(() => ({
 
 // 4. Sign out page
 // 5. On sign out confirm, remove all user data (Sign Out function)
-// 6. Custom auth hook
 
 function SignIn() {
   const { user, setUser } = useContext(AppContext);
